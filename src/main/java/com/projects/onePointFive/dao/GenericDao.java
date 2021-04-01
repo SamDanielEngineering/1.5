@@ -1,4 +1,4 @@
-package com.project1.dao;
+package com.projects.onePointFive.dao;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.project1;
+package com.projects.onePointFive;
 
 
 import org.hibernate.Session;

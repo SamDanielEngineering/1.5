@@ -1,4 +1,4 @@
-package com.project1.model;
+package com.projects.onePointFive.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

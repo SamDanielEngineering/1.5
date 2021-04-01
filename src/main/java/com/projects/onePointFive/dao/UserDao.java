@@ -1,14 +1,14 @@
-package com.project1.dao;
+package com.projects.onePointFive.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project1.util.InitializeUtil;
+import com.projects.onePointFive.util.InitializeUtil;
+import com.projects.onePointFive.model.User;
 import org.apache.log4j.Logger;
 
-import com.project1.model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

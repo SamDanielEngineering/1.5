@@ -1,12 +1,12 @@
-package com.project1.service;
+package com.projects.onePointFive.service;
 
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project1.dao.ReimbursementDao;
-import com.project1.model.Reimbursement;
+import com.projects.onePointFive.dao.ReimbursementDao;
+import com.projects.onePointFive.model.Reimbursement;
 
 public class ReimbursementService {
 	private ReimbursementDao rd;
@@ -36,6 +36,6 @@ public class ReimbursementService {
 	}
 	
 	public void updateReimbursements(int[][] i, int r) {
-		//rd.updateList(i, r);
+		rd.updateList(i, r);
 	}
 }

@@ -1,7 +1,7 @@
-package com.project1.util;
+package com.projects.onePointFive.util;
 
-import com.project1.model.Reimbursement;
-import com.project1.model.User;
+import com.projects.onePointFive.model.Reimbursement;
+import com.projects.onePointFive.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

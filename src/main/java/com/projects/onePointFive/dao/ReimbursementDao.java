@@ -1,7 +1,7 @@
-package com.project1.dao;
+package com.projects.onePointFive.dao;
 
-import com.project1.model.Reimbursement;
-import com.project1.util.InitializeUtil;
+import com.projects.onePointFive.model.Reimbursement;
+import com.projects.onePointFive.util.InitializeUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -61,9 +61,10 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 		return l;
 	}
 
+	@Override
+	@Deprecated
 	public Reimbursement getByUsername(String username) {
-		//Empty. Reason - No use.
-
+		//NULL, USERS CAN MORE THAN ONE REIMBURSEMENT, THIS METHOD IS DEPRECATED.
 		return null;
 	}
 
