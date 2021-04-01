@@ -19,6 +19,9 @@ import org.hibernate.Transaction;
 public class UserDao implements GenericDao <User> {
 	private static final Logger LOGGER = Logger.getLogger(UserDao.class);
 
+	private InitializeUtil temp = new InitializeUtil();
+	private Session session = temp.init();
+
 	private User objectConstructor(ResultSet rs) throws SQLException {
 		return new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getInt(7));
@@ -27,9 +30,6 @@ public class UserDao implements GenericDao <User> {
 	@Override
 	public List<User> getList() {
 		List<User> l = new ArrayList<User>();
-
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
 		l = session.createQuery("FROM User").list();
@@ -42,9 +42,6 @@ public class UserDao implements GenericDao <User> {
 	public User getById(int id) {
 		User u = null;
 
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
-
 		Transaction tx = session.beginTransaction();
 		u = session.get(User.class, id);
 		tx.commit();
@@ -55,9 +52,6 @@ public class UserDao implements GenericDao <User> {
 	@Override
 	public List<User> getByUserId(int id) {
 		List<User> l = new ArrayList<User>();
-
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
 		l = session.createQuery("FROM User WHERE id=" + id).list();
@@ -70,9 +64,6 @@ public class UserDao implements GenericDao <User> {
 	public User getByUsername(String username) {
 		User u = null;
 
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
-
 		Transaction tx = session.beginTransaction();
 		u = session.get(User.class, username);
 		tx.commit();
@@ -82,9 +73,6 @@ public class UserDao implements GenericDao <User> {
 
 	@Override
 	public void insert(User t) {
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
-
 		Transaction tx = session.beginTransaction();
 		session.save(t);
 		tx.commit();
@@ -92,9 +80,6 @@ public class UserDao implements GenericDao <User> {
 
 	@Override
 	public void delete(User t) {
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
-
 		Transaction tx = session.beginTransaction();
 		session.delete(t);
 		tx.commit();

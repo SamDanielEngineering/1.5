@@ -17,7 +17,10 @@ import java.util.List;
  */
 public class ReimbursementDao implements GenericDao<Reimbursement> {
 	private static final Logger LOGGER = Logger.getLogger(ReimbursementDao.class);
-	
+
+	private InitializeUtil temp = new InitializeUtil();
+	private Session session = temp.init();
+
 	private Reimbursement objectConstructor(ResultSet rs) throws SQLException {
 		return new Reimbursement(rs.getInt(1), rs.getFloat(2), rs.getTimestamp(3), rs.getTimestamp(4),
 							rs.getString(5), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
@@ -27,9 +30,6 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 	@Override
 	public List<Reimbursement> getList() {
 		List<Reimbursement> l = new ArrayList<Reimbursement>();
-
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
 		l = session.createQuery("FROM Reimbursement").list();
@@ -42,9 +42,6 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 	public Reimbursement getById(int id) {
 		Reimbursement r = null;
 
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
-
 		Transaction tx = session.beginTransaction();
 		r = session.get(Reimbursement.class, id);
 		tx.commit();
@@ -55,9 +52,6 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 	@Override
 	public List<Reimbursement> getByUserId(int id) {
 		List<Reimbursement> l = new ArrayList<Reimbursement>();
-
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
 		l = session.createQuery("FROM Reimbursement WHERE id=" + id).list();
@@ -75,9 +69,6 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 
 	@Override
 	public void insert(Reimbursement r) {
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
-
 		Transaction tx = session.beginTransaction();
 		session.save(r);
 		tx.commit();
@@ -129,9 +120,6 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 
 	@Override
 	public void delete(Reimbursement r) {
-		InitializeUtil temp = new InitializeUtil();
-		Session session = temp.init();
-
 		Transaction tx = session.beginTransaction();
 		session.delete(r);
 		tx.commit();
