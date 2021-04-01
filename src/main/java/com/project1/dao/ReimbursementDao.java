@@ -1,29 +1,15 @@
 package com.project1.dao;
 
-import java.sql.Array;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import com.project1.model.Reimbursement;
+import com.project1.util.InitializeUtil;
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
-
-import com.project1.Alien;
-import org.apache.log4j.Logger;
-
-import com.project1.model.Reimbursement;
-import com.project1.util.ConnectionUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 /*
  * Purpose of this Dao is to send/retrieve info about a reimbursement
@@ -42,37 +28,13 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 	public List<Reimbursement> getList() {
 		List<Reimbursement> l = new ArrayList<Reimbursement>();
 
-		Configuration con = new Configuration().configure().addAnnotatedClass(Reimbursement.class);
-
-
-		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-
-		SessionFactory sf = con.buildSessionFactory();
-
-		Session session = sf.openSession();
+		InitializeUtil temp = new InitializeUtil();
+		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
-
 		l = session.createQuery("FROM Reimbursement").list();
-
 		tx.commit();
 
-//		try (Connection c = ConnectionUtil.getInstance().getConnection()) {
-//			String qSql = "SELECT * FROM ers_reimbursement";
-//			Statement s = c.createStatement();
-//			ResultSet rs = s.executeQuery(qSql);
-//
-//			while(rs.next()) {
-//				l.add(objectConstructor(rs));
-//			}
-//
-//			rs.close();
-//			s.closeOnCompletion();
-//			LOGGER.debug("All reimbursements were retrieved from the database.");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			LOGGER.error("An attempt to get all reimbursements failed.");
-//		}
 		return l;
 	}
 
@@ -80,38 +42,13 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 	public Reimbursement getById(int id) {
 		Reimbursement r = null;
 
-		Configuration con = new Configuration().configure().addAnnotatedClass(Reimbursement.class);
-
-
-		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-
-		SessionFactory sf = con.buildSessionFactory();
-
-		Session session = sf.openSession();
+		InitializeUtil temp = new InitializeUtil();
+		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
-
 		r = session.get(Reimbursement.class, id);
-
 		tx.commit();
 
-
-//		try(Connection c = ConnectionUtil.getInstance().getConnection()) {
-//			String qSql = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?";
-//			PreparedStatement ps = c.prepareStatement(qSql);
-//			ps.setInt(1, id);
-//			ResultSet rs = ps.executeQuery();
-//
-//			if(rs.next())
-//				r = objectConstructor(rs);
-//
-//			rs.close();
-//			ps.closeOnCompletion();
-//			LOGGER.debug("A reimbursement by ID " + id + " was retrieved from the database.");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			LOGGER.error("An attempt to get a reimbursement by ID" + id + " from the database failed.");
-//		}
 		return r;
 	}
 
@@ -119,36 +56,13 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 	public List<Reimbursement> getByUserId(int id) {
 		List<Reimbursement> l = new ArrayList<Reimbursement>();
 
-		Configuration con = new Configuration().configure().addAnnotatedClass(Reimbursement.class);
-
-
-		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-
-		SessionFactory sf = con.buildSessionFactory();
-
-		Session session = sf.openSession();
+		InitializeUtil temp = new InitializeUtil();
+		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
-
 		l = session.createQuery("FROM Reimbursement WHERE id=" + id).list();
-
 		tx.commit();
-//		try(Connection c = ConnectionUtil.getInstance().getConnection()) {
-//			String qSql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
-//			PreparedStatement ps = c.prepareStatement(qSql);
-//			ps.setInt(1, id);
-//			ResultSet rs = ps.executeQuery();
-//
-//			while(rs.next()) {
-//				l.add(objectConstructor(rs));
-//			}
-//			rs.close();
-//			ps.closeOnCompletion();
-//			LOGGER.debug("A list of reimbursements made by user ID " + id + " was retrieved from the database.");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			LOGGER.error("An attempt to get all reimbursements made by user ID " + id + " fron the database failed.");
-//		}
+
 		System.out.println(l.toString());
 		return l;
 	}
@@ -161,40 +75,12 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 
 	@Override
 	public void insert(Reimbursement r) {
-
-		Configuration con = new Configuration().configure().addAnnotatedClass(Reimbursement.class);
-
-
-		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-
-		SessionFactory sf = con.buildSessionFactory();
-
-		Session session = sf.openSession();
+		InitializeUtil temp = new InitializeUtil();
+		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
-
 		session.save(r);
-
 		tx.commit();
-//		try(Connection c = ConnectionUtil.getInstance().getConnection()) {
-//			String sql = "INSERT INTO ers_reimbursement(reimb_amount, reimb_submitted, reimb_description, "
-//					   + "reimb_author, reimb_status_id, reimb_type_id) VALUES(?, ?, ?, ?, ?, ?)";
-//			PreparedStatement ps = c.prepareStatement(sql);
-//			ps.setFloat(1, r.getAmount());
-//			Calendar cal = Calendar.getInstance();
-//			ps.setTimestamp(2, new Timestamp(cal.getTime().getTime()));
-//			ps.setString(3, r.getDescription());
-//			ps.setInt(4, r.getAuthor());
-//			ps.setInt(5, r.getStatus_id());
-//			ps.setInt(6, r.getType_id());
-//
-//			ps.executeUpdate();
-//			ps.closeOnCompletion();
-//			LOGGER.debug("A new reimbursement was successfully added to the database.");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			LOGGER.error("An attempt to insert a reimbursement to the database failed.");
-//		}
 	}
 
 	public void updateList(int[][] i, int resolver) {
@@ -243,20 +129,11 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 
 	@Override
 	public void delete(Reimbursement r) {
-
-		Configuration con = new Configuration().configure().addAnnotatedClass(Reimbursement.class);
-
-
-		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-
-		SessionFactory sf = con.buildSessionFactory();
-
-		Session session = sf.openSession();
+		InitializeUtil temp = new InitializeUtil();
+		Session session = temp.init();
 
 		Transaction tx = session.beginTransaction();
-
 		session.delete(r);
-
 		tx.commit();
 	}
 	
