@@ -11,11 +11,11 @@ import com.projects.onePointFive.model.Reimbursement;
 public class ReimbursementService {
 	private ReimbursementDao rd;
 	private static final Logger LOGGER = Logger.getLogger(ReimbursementService.class);
-	
+
 	public ReimbursementService() {
 		rd = new ReimbursementDao();
 	}
-	
+
 	public void createReimbursement(String json) {
 		try {
 			Reimbursement r = new ObjectMapper().readValue(json, Reimbursement.class);
@@ -26,14 +26,14 @@ public class ReimbursementService {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<Reimbursement> fetchAllReimbursements() {
 		return rd.getList();
 	}
-	
+
 	public List<Reimbursement> getReimbursementsByUserID(int id) {
 		return rd.getByUserId(id);
 	}
-	
+
 	public void update(Reimbursement r, int id) { rd.update(r,id); }
 }

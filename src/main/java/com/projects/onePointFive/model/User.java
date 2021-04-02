@@ -2,8 +2,10 @@ package com.projects.onePointFive.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "userinformation")
 public class User {
 	@Id
 	private int user_id;
@@ -13,11 +15,11 @@ public class User {
 	private String lastname;
 	private String email;
 	private int role_id;
-	
+
 	public User() {
 		//No-arg constructor
 	}
-	
+
 	public User(int user_id, String username, String password, String firstname, String lastname, String email,
 			int role_id) {
 		this.user_id = user_id;

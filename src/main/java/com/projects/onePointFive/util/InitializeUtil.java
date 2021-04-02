@@ -10,8 +10,8 @@ import org.hibernate.service.ServiceRegistry;
 
 public class InitializeUtil {
     public Session init(){
-        Configuration con = new Configuration().configure().addAnnotatedClass(Reimbursement.class);
-        con.addAnnotatedClass(User.class);
+        Configuration con = new Configuration().configure().addAnnotatedClass(User.class);
+        con.addAnnotatedClass(Reimbursement.class);
         ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
         SessionFactory sf = con.buildSessionFactory();
 

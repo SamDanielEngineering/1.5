@@ -16,11 +16,11 @@ public class Reimbursement {
 	private int resolver;
 	private int status_id;
 	private int type_id;
-	
+
 	public Reimbursement() {
 		//No-arg constructor
 	}
-	
+
 	public Reimbursement(int id, float amount, Timestamp submitted, Timestamp resolved, String description, int author,
 			int resolver, int status_id, int type_id) {
 		this.id = id;
