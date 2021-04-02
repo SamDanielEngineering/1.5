@@ -6,10 +6,13 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * Purpose of this Dao is to send/retrieve info about a reimbursement
@@ -50,11 +53,11 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 	}
 
 	@Override
-	public List<Reimbursement> getByUserId(int id) {
+	public List<Reimbursement> getByUserId(int resolver) {
 		List<Reimbursement> l = new ArrayList<Reimbursement>();
 
 		Transaction tx = session.beginTransaction();
-		l = session.createQuery("FROM Reimbursement WHERE id=" + id).list();
+		l = session.createQuery("FROM Reimbursement WHERE resolver=" + resolver).list();
 		tx.commit();
 
 		System.out.println(l.toString());
@@ -75,48 +78,20 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 		tx.commit();
 	}
 
+	//TODO delete this?
 	public void updateList(int[][] i, int resolver) {
+		List<Integer> a = Arrays.stream(i[0]).boxed().collect( Collectors.toList());
+		List<Integer> d = Arrays.stream(i[1]).boxed().collect( Collectors.toList());
 
-//		try(Connection c = ConnectionUtil.getInstance().getConnection()) {
-//			String aSql = "SELECT acceptarray(?, ?)";
-//			String dSql = "SELECT denyarray(?, ?)";
-//
-//			//Convert both of our int arrays to an Integer object
-//			Integer[] a = Arrays.stream(i[0]).boxed().toArray(Integer[]::new);
-//			Integer[] d = Arrays.stream(i[1]).boxed().toArray(Integer[]::new);
-//
-//			//Convert both of our Integer arrays into something useful for SQL.
-//			Array aArray = c.createArrayOf("INTEGER", a);
-//			Array dArray = c.createArrayOf("INTEGER", d);
-//
-//			//Perform our SQL calls
-//			CallableStatement cs = c.prepareCall(aSql);
-//			cs.setArray(1, aArray);
-//			cs.setInt(2, resolver);
-//			cs.execute();
-//			cs.closeOnCompletion();
-//
-//			cs = c.prepareCall(dSql);
-//			cs.setArray(1, dArray);
-//			cs.setInt(2, resolver);
-//			cs.execute();
-//			cs.closeOnCompletion();
-//
-//			//This section is just for the sake of logging.
-//			int totalCount = 0;
-//			for(int co = 0; co < a.length; co++) {
-//				if (a[co] != -1) {
-//					totalCount++;
-//				}
-//				if (d[co] != -1) {
-//					totalCount++;
-//				}
-//			}
-//			LOGGER.debug(totalCount + " reimbursement" + ((totalCount != 1) ? "s" : "") + " modified by user ID " + resolver + ".");
-//		} catch (SQLException e) {
-//			LOGGER.error("An attempt to accept/deny reimbursements by user ID " + resolver + " from the database failed.");
-//			e.printStackTrace();
-//		}
+		// not sure having accepted and denied their own arrays is necessary when
+		// Reimbursement objects come with status codes
+
+	}
+	public void update(Reimbursement r, int resolver) {
+
+		Transaction tx = session.beginTransaction();
+		session.saveOrUpdate("FROM Reimbursement WHERE resolver=" + resolver + "AND id=" + r.getId());
+		tx.commit();
 	}
 
 	@Override
