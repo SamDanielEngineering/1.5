@@ -35,7 +35,5 @@ public class ReimbursementService {
 		return rd.getByUserId(id);
 	}
 	
-	public void updateReimbursements(int[][] i, int r) {
-		rd.updateList(i, r);
-	}
+	public void update(Reimbursement r, int id) { rd.update(r,id); }
 }
