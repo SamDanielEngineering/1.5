@@ -5,7 +5,6 @@ import com.projects.onePointFive.dao.ReimbursementDao;
 import com.projects.onePointFive.dao.UserDao;
 import com.projects.onePointFive.model.Reimbursement;
 import com.projects.onePointFive.model.User;
-import com.projects.onePointFive.servlet.FirstTomcatServlet;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

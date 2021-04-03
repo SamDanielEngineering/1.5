@@ -5,9 +5,9 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         version="2.5">
 
-    <welcome-file-list>
-        <welcome-file>welcome.html</welcome-file>
-    </welcome-file-list>
+<welcome-file-list>
+    <welcome-file>welcome.html</welcome-file>
+</welcome-file-list>
 
     <context-param>
         <param-name>global</param-name>
@@ -17,7 +17,7 @@
     <servlet>
         <servlet-name>first</servlet-name>
         <servlet-class>com.projects.onePointFive.servlet.FirstTomcatServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>0</load-on-startup>
     </servlet>
 
     <servlet-mapping>
@@ -30,6 +30,19 @@
         <url-pattern>*.first</url-pattern>
     </servlet-mapping>
 
+<!--    <servlet>-->
+<!--        <servlet-name>ses</servlet-name>-->
+<!--        <servlet-class>dev.enterprise.servlet.SessionServlet</servlet-class>-->
+<!--    </servlet>-->
 
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>session</servlet-name>-->
+<!--        <url-pattern>/ses</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>ses</servlet-name>-->
+<!--        <url-pattern>/session</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 </web-app>
