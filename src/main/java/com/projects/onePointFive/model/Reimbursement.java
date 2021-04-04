@@ -2,20 +2,34 @@ package com.projects.onePointFive.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 
 @Entity
 public class Reimbursement {
 	@Id
 	private int id;
 	private float amount;
-	private Timestamp submitted;
-	private Timestamp resolved;
+	private Timestamp submitted = Timestamp.from(ZonedDateTime.now().toInstant());
+	private Timestamp resolved = Timestamp.from(ZonedDateTime.now().toInstant());
 	private String description;
 	private int author;
 	private int resolver;
 	private int status_id;
 	private int type_id;
+
+	public Reimbursement(int id, float amount, String description, int author, int resolver, int status_id, int type_id) {
+		this.id = id;
+		this.amount = amount;
+		this.description = description;
+		this.author = author;
+		this.resolver = resolver;
+		this.status_id = status_id;
+		this.type_id = type_id;
+	}
+
+
 
 	public Reimbursement() {
 		//No-arg constructor

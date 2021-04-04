@@ -16,15 +16,8 @@ public class ReimbursementService {
 		rd = new ReimbursementDao();
 	}
 
-	public void createReimbursement(String json) {
-		try {
-			Reimbursement r = new ObjectMapper().readValue(json, Reimbursement.class);
-			LOGGER.debug("JSON from the client was successfully parsed.");
-			rd.insert(r);
-		} catch (Exception e) {
-			LOGGER.error("Something occurred during JSON parsing for a new reimbursement. Is the JSON malformed?");
-			e.printStackTrace();
-		}
+	public void sendNewReimbursement(Reimbursement r) {
+		rd.insert(r);
 	}
 
 	public List<Reimbursement> fetchAllReimbursements() {
@@ -36,4 +29,8 @@ public class ReimbursementService {
 	}
 
 	public void update(Reimbursement r, int id) { rd.update(r,id); }
+
+	public void deleteReimbursement(int reimbursementID) {
+		rd.delete(rd.getById(reimbursementID));
+	}
 }

@@ -14,8 +14,6 @@ import org.hibernate.Transaction;
  * to/from the database. It then returns the composed Reimbursement Object.
  */
 public class UserDao implements GenericDao <User> {
-	private static final Logger LOGGER = Logger.getLogger(UserDao.class);
-
 	private InitializeUtil temp = new InitializeUtil();
 	private Session session = temp.init();
 
@@ -59,10 +57,25 @@ public class UserDao implements GenericDao <User> {
 		User u = null;
 
 		Transaction tx = session.beginTransaction();
-		u = session.get(User.class, username);
+		List<User> l = new ArrayList<User>();
+
+		l = session.createQuery("FROM User WHERE username='" + username + "'").list();
+
+		//u = session.get(User.class, username);
 		tx.commit();
 
-		return u;
+		return l.get(0);
+	}
+
+	public User getByUsernameAndPassword(String username, String password) {
+		User u = null;
+		List<User> l = new ArrayList<User>();
+
+		Transaction tx = session.beginTransaction();
+		l = session.createQuery("FROM User WHERE username='" + username + "' AND password='" + password + "'").list();
+		tx.commit();
+
+		return l.get(0);
 	}
 
 	@Override

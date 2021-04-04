@@ -60,7 +60,6 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 		l = session.createQuery("FROM Reimbursement WHERE resolver=" + resolver).list();
 		tx.commit();
 
-		System.out.println(l.toString());
 		return l;
 	}
 
@@ -78,19 +77,11 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 		tx.commit();
 	}
 
-	//TODO delete this?
-	public void updateList(int[][] i, int resolver) {
-		List<Integer> a = Arrays.stream(i[0]).boxed().collect( Collectors.toList());
-		List<Integer> d = Arrays.stream(i[1]).boxed().collect( Collectors.toList());
-
-		// not sure having accepted and denied their own arrays is necessary when
-		// Reimbursement objects come with status codes
-
-	}
 	public void update(Reimbursement r, int resolver) {
 
 		Transaction tx = session.beginTransaction();
-		session.saveOrUpdate("FROM Reimbursement WHERE resolver=" + resolver + "AND id=" + r.getId());
+		//session.saveOrUpdate("FROM Reimbursement WHERE resolver=" + resolver + " AND id=" + r.getId());
+		session.update(r);
 		tx.commit();
 	}
 
