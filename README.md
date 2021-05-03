@@ -1,27 +1,33 @@
-# Project 1.5
+# Hibernate ORM Refactor
 
-## Instructions
+## Project Description
 
-1. clone the repository and change the working directory to inside the root folder
-> git clone https://github.com/RevatureRobert/Project1.5-template.git
-> 
-> cd Project1.5-template
+Refactor the projects existing JDBC logic with Hibernate and host servlets on a Tomcat server. 
 
-2. Install the archetype onto your local repository
-> mvn install
+## Technologies Used
 
-3. Move into a directory where you want your project to be located.
+* Hibernate
+* Tomcat
+* PostgreSQL
 
-4. Generate the new project
-> mvn archetype:generate \
-> -DarchetypeArtifactId="Project1.5" \
-> -DarchetypeGroupId="dev.enterprise" \
-> -DgroupId=< your group id > \
-> -DartifactId=< your project id >
+## Features
 
-5. Your project should be created and have all the necessary files to begin your new project!
+List of features ready:
+* HTTP CRUD operations(GET, POST, DELETE)
+* SQL Database
+* Hibernate ORM
 
-## Specs
-- Remove the JDBC logic and refactor with Hibernate ORM.
-- Add in servlets and host on Tomcat Server.
-- Deploy to AWS using Elastic Beanstalk (optional)
+## Getting Started
+
+* git clone https://github.com/SamDanielEngineering/1.5.git
+* Configue a local tomcat server to run the application.
+
+## Usage
+
+* Use a tool such as Postman to create HTTP request to the backend.
+* Check src/main/java/com/projects/onePointFive/servlet documentation on how to configure your HTTP request in Postman.
+
+## Contributors
+
+* Sam Daniel
+* Elizebeth Ye
